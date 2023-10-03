@@ -42,12 +42,12 @@ def main():
 
     clock = pg.time.Clock()
     tmr = 0
-    kk_img_2 = pg.transform.flip(kk_img, True, False)
-    dire = {
-    pg.K_UP: pg.transform.rotate(kk_img_2, 90),
-    pg.K_DOWN: pg.transform.rotate(kk_img_2, -90),
-    pg.K_LEFT: pg.transform.rotate(kk_img, 0),
-    pg.K_RIGHT: pg.transform.flip(kk_img, True, False),
+    kk_img_2 = pg.transform.flip(kk_img, True, False) #こうかとんの画像を左右反転したものをつくる
+    dire = {                                    #direという画像の辞書を作成する  
+    pg.K_UP: pg.transform.rotate(kk_img_2, 90), #上キーを押したとき、反転した画像を反時計回りに90度回転させる
+    pg.K_DOWN: pg.transform.rotate(kk_img_2, -90), #下キーを押したとき、反転した画像を時計回りに90度回転させる
+    pg.K_LEFT: pg.transform.rotate(kk_img, 0), #左キーを押したとき、元の画像を表示させる
+    pg.K_RIGHT: pg.transform.flip(kk_img, True, False), #右キーを押したとき、元の画像を左右反転させる
     }
     while True:
         for event in pg.event.get():
@@ -62,7 +62,7 @@ def main():
         """こうかとん"""
         key_lst = pg.key.get_pressed()
         sum_mv = [0,0]
-        for key, pc in dire.items():
+        for key, pc in dire.items(): #pcという変数を作成し、上下左右キーが押されたときにdireの辞書を呼び出す
             if key_lst[key]:
                 kk_img = pc
         for key, mv in delta.items():
