@@ -12,6 +12,8 @@ pg.K_LEFT: (-5, 0),
 pg.K_RIGHT: (+5, 0),
 }
 
+
+
 def check_bound(obj_rct: pg.Rect):
     yoko, tate = True, True
     if obj_rct.left < 0 or WIDTH < obj_rct.right:
@@ -40,6 +42,13 @@ def main():
 
     clock = pg.time.Clock()
     tmr = 0
+    kk_img_2 = pg.transform.flip(kk_img, True, False)
+    dire = {
+    pg.K_UP: pg.transform.rotate(kk_img_2, 90),
+    pg.K_DOWN: pg.transform.rotate(kk_img_2, -90),
+    pg.K_LEFT: pg.transform.rotate(kk_img, 0),
+    pg.K_RIGHT: pg.transform.flip(kk_img, True, False),
+    }
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: 
@@ -53,6 +62,9 @@ def main():
         """こうかとん"""
         key_lst = pg.key.get_pressed()
         sum_mv = [0,0]
+        for key, pc in dire.items():
+            if key_lst[key]:
+                kk_img = pc
         for key, mv in delta.items():
             if key_lst[key]:
                 sum_mv[0] += mv[0]
