@@ -3,7 +3,7 @@ import sys
 import pygame as pg
 
 
-WIDTH, HEIGHT = 1600, 900
+WIDTH, HEIGHT = 1200, 675
 
 
 def main():
@@ -18,6 +18,8 @@ def main():
     bd_rct = bd_img.get_rect()
     x, y = random.randint(0, WIDTH), random.randint(0, HEIGHT)
     bd_rct.center = (x, y)
+    vx, vy = +5, +5
+
     clock = pg.time.Clock()
     tmr = 0
     while True:
@@ -26,11 +28,12 @@ def main():
                 return
 
         screen.blit(bg_img, [0, 0])
-        screen.blit(kk_img, [900, 400])
+        screen.blit(kk_img, [675, 300])
+        bd_rct.move_ip(vx, vy)
         screen.blit(bd_img, bd_rct)
         pg.display.update()
         tmr += 1
-        clock.tick(10)
+        clock.tick(50)
 
 
 if __name__ == "__main__":
